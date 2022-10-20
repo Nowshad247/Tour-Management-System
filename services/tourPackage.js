@@ -8,6 +8,11 @@ exports.createtourPackageservice = async (data) => {
   const savedata = await tour.save();
   return savedata;
 };
+//show by id
+exports.showByIdModel = async (id) => {
+  const result = await TourPackageModel.findOne({ _id: id });
+  return result;
+};
 exports.updatedata = async (id, data) => {
   const result = await TourPackageModel.updateOne(
     { _id: id },

@@ -2,6 +2,7 @@ const {
   getTourPackage,
   createtourPackageservice,
   updatedata,
+  showByIdModel,
 } = require("../services/tourPackage");
 
 exports.createTourPackage = async (req, res) => {
@@ -32,6 +33,13 @@ exports.getTourPackage = async (req, res) => {
       error: error.message,
     });
   }
+};
+exports.showById = async (req, res) => {
+  const { id } = req.params;
+  const result = await showByIdModel(id);
+  res.status(200).json({
+    data: result,
+  });
 };
 exports.update = async (req, res, next) => {
   try {

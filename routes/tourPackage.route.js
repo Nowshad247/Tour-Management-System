@@ -5,5 +5,6 @@ router
   .route("/")
   .get(tourController.getTourPackage)
   .post(tourController.createTourPackage);
+router.route("/:id").get(tourController.showById);
 router.route("/:id").patch(tourController.update);
 module.exports = router;
