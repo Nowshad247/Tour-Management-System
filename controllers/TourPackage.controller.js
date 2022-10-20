@@ -5,14 +5,15 @@ const {
   showByIdModel,
 } = require("../services/tourPackage");
 
-exports.createTourPackage = async (req, res) => {
+exports.createTourPackage = async (req, res, next) => {
   try {
     //save or create
-    const savedata = await createtourPackageservice(req.body);
+    // const savedata = await createtourPackageservice(req.body);
+    console.log(req.body);
     res.status(200).send({
       status: "success",
       message: "data saveed",
-      data: savedata,
+      data: "data",
     });
   } catch (error) {
     res.status(400).json({
