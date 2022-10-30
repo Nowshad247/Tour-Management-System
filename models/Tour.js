@@ -25,6 +25,14 @@ const tourPackageSchema = mongoose.Schema(
         message: "Undifine unite value",
       },
     },
+    statusType: {
+      type: String,
+      required: true,
+      enam: {
+        values: ["OnGoing", "OnHoled", "Expired"],
+        message: "value status type in not match",
+      },
+    },
   },
   {
     timestamps: true,

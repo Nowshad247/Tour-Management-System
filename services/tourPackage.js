@@ -1,6 +1,9 @@
 const TourPackageModel = require("../models/Tour");
-exports.getTourPackage = async () => {
-  const data = await TourPackageModel.find({});
+exports.getTourPackage = async (filters, queries) => {
+  //price:{$gt:50}
+  const data = await TourPackageModel.find(filters)
+    .select(queries.fields)
+    .sort(queries.sortBy);
   return data;
 };
 exports.createtourPackageservice = async (data) => {

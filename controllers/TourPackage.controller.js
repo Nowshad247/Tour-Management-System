@@ -8,12 +8,12 @@ const {
 exports.createTourPackage = async (req, res, next) => {
   try {
     //save or create
-    // const savedata = await createtourPackageservice(req.body);
-    console.log(req.body);
+    const savedata = await createtourPackageservice(req.body);
+    // console.log(req.body);
     res.status(200).send({
       status: "success",
       message: "data saveed",
-      data: "data",
+      data: savedata,
     });
   } catch (error) {
     res.status(400).json({
@@ -24,7 +24,34 @@ exports.createTourPackage = async (req, res, next) => {
 };
 exports.getTourPackage = async (req, res) => {
   try {
-    const data = await getTourPackage();
+    const filters = { ...req.query };
+
+    //{price:{$ gt:50}
+    //{ price: { gt: '50' } }
+    //gt ,lt ,gte ,lte
+    let filtersString = JSON.stringify(filters);
+    filtersString = filtersString.replace(
+      /\b(gt|gte|lt|lte)\b/g,
+      (match) => `$${match}`
+    );
+
+    filtersData = JSON.parse(filtersString);
+    const excludeFilds = ["sort", "page", "limit", "fields"];
+    excludeFilds.forEach((field) => delete filtersData[field]);
+
+    const queries = {};
+
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(",").join(" ");
+      queries.sortBy = sortBy;
+    }
+    if (req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      queries.fields = fields;
+    }
+
+    const data = await getTourPackage(filtersData, queries);
+
     res.status(200).json({
       data,
     });
