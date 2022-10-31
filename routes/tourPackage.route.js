@@ -8,5 +8,6 @@ router
   .get(tourController.getTourPackage)
   .post(tourController.createTourPackage);
 router.route("/show/:id").get(vigitor, tourController.showById);
+router.route("/trending").get(tourController.trending);
 router.route("/:id").patch(tourController.update);
 module.exports = router;

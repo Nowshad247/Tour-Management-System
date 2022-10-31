@@ -3,6 +3,7 @@ const {
   createtourPackageservice,
   updatedata,
   showByIdModel,
+  trending,
 } = require("../services/tourPackage");
 
 exports.createTourPackage = async (req, res, next) => {
@@ -79,6 +80,12 @@ exports.showById = async (req, res) => {
   const result = await showByIdModel(id);
   res.status(200).json({
     data: result,
+  });
+};
+exports.trending = async (req, res) => {
+  const toptrending = await trending();
+  res.status(200).json({
+    getData: toptrending,
   });
 };
 exports.update = async (req, res, next) => {

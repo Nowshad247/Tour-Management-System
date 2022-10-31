@@ -26,6 +26,12 @@ exports.IncriseVigitoor = async (id) => {
   );
   return vigitorAdd;
 };
+exports.trending = async () => {
+  const trendingResult = await TourPackageModel.find({})
+    .sort({ vigitor: -1 })
+    .limit(3);
+  return trendingResult;
+};
 exports.updatedata = async (id, data) => {
   const result = await TourPackageModel.updateOne(
     { _id: id },
