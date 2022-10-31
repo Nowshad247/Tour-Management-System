@@ -33,6 +33,10 @@ const tourPackageSchema = mongoose.Schema(
         message: "value status type in not match",
       },
     },
+    vigitor: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
